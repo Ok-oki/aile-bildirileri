@@ -130,19 +130,39 @@
                 background-image: url('https://via.placeholder.com/1920x1080.png?text=Digital+World');
             }
         }
+
+        /* Hakkında Bilgi Stili */
+        .about {
+            position: absolute;
+            left: 10px;
+            top: 20%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #33FF00;
+            border-radius: 10px;
+            padding: 20px;
+            color: #33FF00;
+            font-size: 18px;
+            z-index: 10;
+            width: 200px; /* Hakkında bilgisi için genişlik */
+        }
     </style>
 </head>
 <body>
 
     <div class="currency-date">
-        <div class="currency" id="exchangeRate">Döviz Kuru: Loading...</div>
-        <div class="date-time" id="dateTime">Tarih/Saat: Loading...</div>
+        <div class="currency" id="exchangeRate">Döviz Kuru: Yükleniyor...</div>
+        <div class="date-time" id="dateTime">Tarih/Saat: Yükleniyor...</div>
     </div>
 
     <h2>Aile Bildirileri</h2>
     
     <div class="sidebar-text left">Okay Ok yaparsa kaliteli yapar</div>
     <div class="sidebar-text right">Okay Ok yaparsa kaliteli yapar</div>
+
+    <div class="about">
+        <h4>OKay OK Hakkında</h4>
+        <p>Ben OKEY, TRNC vatandaşıyım. Lise yıllarımda programlamaya ilgi duydum ve şimdi Lefke Avrupa Üniversitesi’nde Bilgi Sistemleri ve Teknolojisi okuyorum. Teknoloji ve yeniliklerle dolu bir hayat hedefliyorum.</p>
+    </div>
 
     <div>
         <h3>Ana Sayfa Mesajı</h3>
@@ -172,21 +192,24 @@
         <h3>Anacığım</h3>
         <p><strong>Doğum Yılı:</strong> 1978</p>
         <p><strong>Tanım:</strong> Anacığım, düşünceli bir öğretmen. Ailemizi bir arada tutmak için her zaman çabalıyor ve bizim mutluluğumuz için elinden geleni yapıyor. Kendine de zaman ayırmayı unutmamalı.</p>
-        <p style="font-size: 20px; color: #00b300;"><strong>Sevgi Dolu Mesaj:</strong> Anacığım, senin özverin ve sevgilerin bizim için her şeyden değerli. Kendi mutluluğunu da unutma! 🌼</p>
+        <p style="font-size: 20px; color: #00b300;"><strong>Sevgi Dolu Mesaj:</strong> Anacığım, senin özverin ve sevgin bizleri hep güçlü kılıyor. Seninle gurur duyuyorum! ❤️</p>
     </div>
 
     <script>
-        // Tarih ve saat güncelleme
-        function updateDateTime() {
-            const now = new Date();
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const formattedDate = now.toLocaleString('tr-TR', options);
-            document.getElementById('dateTime').innerText = `Tarih/Saat: ${formattedDate}`;
+        // Döviz kuru ve tarih/saat bilgilerini almak için API çağrısı
+        async function getExchangeRate() {
+            const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD'); // API URL'si
+            const data = await response.json();
+            const rate = data.rates.TRY; // TL kuru
+            const date = new Date(data.date).toLocaleString(); // Tarih ve saat
+
+            document.getElementById('exchangeRate').innerText = `Döviz Kuru: ${rate.toFixed(2)} TL`;
+            document.getElementById('dateTime').innerText = `Tarih/Saat: ${date}`;
         }
 
-        // Döviz kuru güncelleme
-        async function updateExchangeRate() {
-            try {
-                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD'); // Örnek API
-                const data = await response.json();
-               
+        // Sayfa yüklendiğinde döviz kuru bilgilerini al
+        window.onload = getExchangeRate;
+    </script>
+
+</body>
+</html>
