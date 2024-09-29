@@ -88,14 +88,20 @@
             right: 20px;
             text-align: right;
             z-index: 10;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #33FF00;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 20px; /* Daha büyük yazı boyutu */
         }
 
         .currency {
             font-weight: bold;
+            font-size: 24px; /* Döviz kuru için daha büyük yazı boyutu */
         }
 
         .date-time {
-            font-size: 14px;
+            font-size: 20px; /* Güncel tarih/saat için daha büyük yazı boyutu */
             color: #fff;
         }
 
@@ -183,11 +189,4 @@
             try {
                 const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD'); // Örnek API
                 const data = await response.json();
-                const usdToTry = data.rates.TRY;
-                document.getElementById('exchangeRate').innerText = `Döviz Kuru: 1 USD = ${usdToTry.toFixed(2)} TRY`;
-            } catch (error) {
-                document.getElementById('exchangeRate').innerText = 'Döviz Kuru: Hata oluştu';
-            }
-        }
-
-        // Sayfa yüklendiğinde
+               
