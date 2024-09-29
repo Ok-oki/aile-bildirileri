@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okcan Teknoloji</title>
+    <title>Okay OK</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,131 +12,218 @@
             background-color: #f4f4f4;
         }
 
-        h1 {
+        h1, h2 {
             text-align: center;
-            color: #007bff;
         }
 
-        #bmiCalculator {
-            margin-top: 20px;
+        #newsTicker {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 20px;
+            animation: ticker 15s linear infinite;
+        }
+
+        @keyframes ticker {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        #info, #calendar, #jobListings, #horoscope {
+            margin: 20px 0;
             padding: 15px;
             background-color: #e2e2e2;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 18px;
         }
 
-        input[type="number"] {
-            width: 80px;
-            margin-right: 10px;
+        #dateTime, #exchangeRate {
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 20px;
         }
 
-        button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
+        #lastUpdated {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        #okcanInfo {
+            background-color: #ffcc00;
+            padding: 10px;
+            margin: 20px 0;
             border-radius: 5px;
-            cursor: pointer;
+            text-align: center;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        #birthCalculator {
+            margin-top: 20px;
         }
 
-        #twitterTopics, #instagramPosts {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .job {
+            margin: 5px 0;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
+        .horoscope {
             margin: 5px 0;
         }
     </style>
 </head>
 <body>
 
-    <h1>Okcan Teknoloji</h1>
+    <div id="lastUpdated">Son Güncelleme: Loading...</div>
+    <h1>Okay OK</h1>
 
-    <div id="bmiCalculator">
-        <h2>Boy-Kilo İndeksi Hesaplama</h2>
-        <label for="weight">Kilonuzu (kg) girin:</label>
-        <input type="number" id="weight" placeholder="Kilo" required />
-        <br>
-        <label for="height">Boyunuzu (cm) girin:</label>
-        <input type="number" id="height" placeholder="Boy" required />
-        <br>
+    <div id="dateTime">Tarih/Saat: Loading...</div>
+    <div id="exchangeRate">Döviz Kuru: Loading...</div>
+    <div id="newsTicker">Haber yükleniyor...</div>
+
+    <div id="okcanInfo">
+        <h2>Okcan Teknoloji: 🌟 Kalite ve Güvenilirlik!</h2>
+        <p>Okcan Teknoloji, Kuzey Kıbrıs'ta en kaliteli elektronik ürünleri sunan bir mağazadır! 🛒 Mi Scooter S3, televizyonlar 📺, klima cihazları ❄️ ve daha fazlasıyla ihtiyacınıza uygun çözümler sağlıyoruz. Müşteri memnuniyeti önceliğimiz! Daha fazla bilgi almak için bize ulaşın: 📞 0392 723 77 18.</p>
+    </div>
+
+    <div id="birthCalculator">
+        <h2>Boyunuzu Kilonuzu Bilmek İster Misiniz?</h2>
+        <p>Beden Kitle İndeksi (BKİ) hesaplayın:</p>
+        <input type="number" id="height" placeholder="Boy (cm)">
+        <input type="number" id="weight" placeholder="Kilo (kg)">
         <button onclick="calculateBMI()">Hesapla</button>
         <p id="bmiResult"></p>
     </div>
 
-    <div id="twitterTopics">
-        <h3>Güncel Twitter Konuları:</h3>
-        <ul id="twitterList">Yükleniyor...</ul>
+    <div id="calendar">
+        <h2>2024 Takvimi</h2>
+        <p id="calendarResults">Yıl boyunca önemli günleri burada listeleyeceğiz.</p>
     </div>
 
-    <div id="instagramPosts">
-        <h3>Okcan Teknoloji Instagram Postları:</h3>
-        <ul id="instagramList">Yükleniyor...</ul>
+    <div id="jobListings">
+        <h2>Güncel İş İlanları</h2>
+        <div id="jobs">Yükleniyor...</div>
+    </div>
+
+    <div id="horoscope">
+        <h2>Günlük Burç Yorumları</h2>
+        <div id="horoscopeResults">Yükleniyor...</div>
     </div>
 
     <script>
-        // Boy Kilo İndeksi Hesaplama
+        // Tarih ve saati güncelleme
+        function updateDateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('dateTime').innerText = `Tarih/Saat: ${now.toLocaleString('tr-TR', options)}`;
+            document.getElementById('lastUpdated').innerText = `Son Güncelleme: ${now.toLocaleString('tr-TR', options)}`;
+        }
+
+        // Döviz kurunu almak için API çağrısı
+        async function getExchangeRate() {
+            try {
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                if (!response.ok) {
+                    throw new Error('Döviz kuru yüklenemedi.');
+                }
+                const data = await response.json();
+                const rate = data.rates.TRY;
+                document.getElementById('exchangeRate').innerText = `Döviz Kuru: 1 USD = ${rate.toFixed(2)} TL`;
+            } catch (error) {
+                console.error('Döviz kuru hatası:', error);
+                document.getElementById('exchangeRate').innerText = 'Döviz Kuru yüklenemedi. Lütfen bağlantınızı kontrol edin veya API hizmetini kontrol edin.';
+            }
+        }
+
+        // Güncel haberleri almak için API çağrısı
+        async function getNews() {
+            // Buraya ücretsiz bir haber API'si kullanın
+            const newsApiUrl = 'https://api.currentsapi.services/v1/latest-news?language=tr&apiKey=YOUR_API_KEY'; // Burada uygun bir API kullanmalısınız
+            try {
+                const response = await fetch(newsApiUrl);
+                if (!response.ok) {
+                    throw new Error('Haber yüklenemedi.');
+                }
+                const data = await response.json();
+                const articles = data.news;
+
+                if (articles.length > 0) {
+                    const newsTitles = articles.map(article => article.title).join(' • ');
+                    document.getElementById('newsTicker').innerText = newsTitles;
+                } else {
+                    document.getElementById('newsTicker').innerText = 'Güncel haber bulunamadı.';
+                }
+            } catch (error) {
+                console.error('Hata:', error);
+                document.getElementById('newsTicker').innerText = 'Haberler yüklenemedi. Lütfen bağlantınızı kontrol edin.';
+            }
+        }
+
+        // BKİ hesaplama fonksiyonu
         function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value) / 100; // cm'den m'ye çevir
             const weight = parseFloat(document.getElementById('weight').value);
-            const height = parseFloat(document.getElementById('height').value) / 100; // cm to m
-            if (isNaN(weight) || isNaN(height) || height <= 0) {
-                document.getElementById('bmiResult').innerText = 'Lütfen geçerli bir kilo ve boy girin.';
+            if (isNaN(height) || isNaN(weight)) {
+                document.getElementById('bmiResult').innerText = 'Lütfen geçerli boy ve kilo girin.';
                 return;
             }
             const bmi = weight / (height * height);
-            document.getElementById('bmiResult').innerText = `BMI: ${bmi.toFixed(2)} (${getBMICategory(bmi)})`;
+            document.getElementById('bmiResult').innerText = `Beden Kitle İndeksiniz: ${bmi.toFixed(2)}`;
         }
 
-        // BMI Kategorisi
-        function getBMICategory(bmi) {
-            if (bmi < 18.5) return 'Zayıf';
-            if (bmi < 24.9) return 'Normal kilolu';
-            if (bmi < 29.9) return 'Fazla kilolu';
-            return 'Obez';
+        // Güncel iş ilanlarını ve burç yorumlarını almak için API çağrısı
+        async function getJobListings() {
+            // Buraya güncel iş ilanları API'sini ekleyin
+            const jobApiUrl = 'https://api.example.com/jobs'; // Örnek URL
+            try {
+                const response = await fetch(jobApiUrl);
+                if (!response.ok) {
+                    throw new Error('İş ilanları yüklenemedi.');
+                }
+                const data = await response.json();
+                const jobs = data.jobs.map(job => `<div class="job">${job.title} - ${job.company}</div>`).join('');
+                document.getElementById('jobs').innerHTML = jobs;
+            } catch (error) {
+                console.error('Hata:', error);
+                document.getElementById('jobs').innerText = 'İş ilanları yüklenemedi. Lütfen bağlantınızı kontrol edin.';
+            }
         }
 
-        // Twitter konularını almak için örnek veri
-        async function getTwitterTopics() {
-            const exampleTopics = [
-                "Yerli otomobil tanıtımı",
-                "Kuzey Kıbrıs'ta güncel hava durumu",
-                "Yeni eğitim sistemi ile ilgili gelişmeler",
-                "2024 genel seçimleri hakkında konuşmalar"
-            ];
-            const twitterList = document.getElementById('twitterList');
-            twitterList.innerHTML = exampleTopics.map(topic => `<li>${topic}</li>`).join('');
+        // Günlük burç yorumlarını almak için API çağrısı
+        async function getHoroscope() {
+            // Buraya burç yorumları API'sini ekleyin
+            const horoscopeApiUrl = 'https://api.example.com/horoscope'; // Örnek URL
+            try {
+                const response = await fetch(horoscopeApiUrl);
+                if (!response.ok) {
+                    throw new Error('Burç yorumları yüklenemedi.');
+                }
+                const data = await response.json();
+                const horoscope = data.horoscope.map(h => `<div class="horoscope">${h.sign}: ${h.message}</div>`).join('');
+                document.getElementById('horoscopeResults').innerHTML = horoscope;
+            } catch (error) {
+                console.error('Hata:', error);
+                document.getElementById('horoscopeResults').innerText = 'Burç yorumları yüklenemedi. Lütfen bağlantınızı kontrol edin.';
+            }
         }
 
-        // Instagram gönderilerini almak için örnek veri
-        async function getInstagramPosts() {
-            const examplePosts = [
-                "📸 Okcan Teknoloji'de yeni ürünler!",
-                "🌟 Müşteri memnuniyeti önceliğimizdir!",
-                "🎉 Yaz kampanyalarımıza katılın!",
-                "📱 Mi Scooter S3 satışta!"
-            ];
-            const instagramList = document.getElementById('instagramList');
-            instagramList.innerHTML = examplePosts.map(post => `<li>${post}</li>`).join('');
+        // Sayfa yüklendiğinde tüm fonksiyonları çağır
+        function init() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            getExchangeRate();
+            getNews();
+            getJobListings();
+            getHoroscope();
         }
 
-        // Sayfa yüklendiğinde çağırılan fonksiyonlar
-        document.addEventListener('DOMContentLoaded', () => {
-            getTwitterTopics();
-            getInstagramPosts();
-        });
+        // Sayfa yüklendiğinde başlat
+        window.onload = init;
     </script>
 </body>
 </html>
