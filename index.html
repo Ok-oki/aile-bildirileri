@@ -9,7 +9,8 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #282c34; /* Ana sayfa için koyu arka plan */
+            color: white; /* Yazı rengi beyaz */
         }
         h2 {
             text-align: center;
@@ -23,13 +24,13 @@
             padding: 10px 15px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: #4CAF50; /* Buton rengi */
             color: white;
             border: none;
             border-radius: 5px;
         }
         .button:hover {
-            background-color: #45a049;
+            background-color: #45a049; /* Buton hover rengi */
         }
         .modal {
             display: none; /* Başlangıçta gizli */
@@ -71,10 +72,42 @@
             border: 1px solid #b8daff;
             border-radius: 5px;
         }
+        .love-message {
+            font-size: 24px; /* Mesaj için büyük font boyutu */
+            color: #4CAF50; /* Mesaj için yeşil renk */
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* Bayrak ve hacker simgesi için stil */
+        .icon-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .icon {
+            width: 50px; /* Simge boyutu */
+            height: auto;
+            margin: 0 10px; /* Simgeler arasında boşluk */
+        }
+        /* Özel sayfa arka plan renkleri */
+        .cankayim {
+            background-color: #ff6347; /* Cankayım için arka plan rengi */
+        }
+        .babam {
+            background-color: #4682b4; /* Babam için arka plan rengi */
+        }
+        .anacigim {
+            background-color: #ffcc00; /* Anacığım için arka plan rengi */
+        }
     </style>
 </head>
 <body>
     <h2>Aile Bildirileri</h2>
+
+    <!-- Bayrak ve hacker simgesi -->
+    <div class="icon-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_the_Turkish_Republic_of_Northern_Cyprus.svg" alt="KKTC Bayrağı" class="icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Hacker.svg/512px-Hacker.svg.png" alt="Hacker Simgesi" class="icon">
+    </div>
 
     <!-- Menü -->
     <div class="menu">
@@ -84,100 +117,72 @@
     </div>
 
     <!-- Cankayım Modal -->
-    <div id="cankayim" class="modal">
+    <div id="cankayim" class="modal cankayim">
         <div class="modal-content">
             <span class="close" onclick="closeModal('cankayim')">&times;</span>
             <h3>Cankayım</h3>
             <p><strong>Doğum Yılı:</strong> 2010</p>
-            <p><strong>Tanım:</strong> Cankayım, genç yaşına rağmen büyük hayalleri olan bir çocuk. Kumral saçları ve parlayan yeşil gözleriyle dikkat çeken Cankayım, futbol oynamayı tutku haline getirmiş durumda. Saha onun ikinci evi gibi! Ancak balık tutma konusunda pek şanslı değil; sanki balıklar onu görünce “Burada ne yapıyorsun?” diye kaçıyorlar. Ama pes etmek yok, değil mi?</p>
-            <p><strong>Dikkat Edin:</strong> Cankayım, balık tutmayı öğrenmekte ısrar et; belki bir gün o büyük balığı yakalayabilirsin! Unutma, denizlerdeki balıklar bazen insanları şaşırtabilir. Kendi balık hikayelerini bir gün arkadaşlarına anlatacak kadar eğlenceli olacağına inanıyorum! İleride, denizden çıkardığın balıkları, şansına ve azmine göre "Bunlar benim en büyük arkadaşlarım!" diyerek sunacaksın! 🐟💨</p>
+            <p><strong>Tanım:</strong> Cankayım, genç yaşına rağmen büyük hayalleri olan bir çocuk. Kumral saçları ve parlayan yeşil gözleriyle dikkat çeken Cankayım, futbol oynamayı tutku haline getirmiş durumda.</p>
+            <p class="love-message">Seni çok seviyorum, Cankayım! Her zaman hayallerinin peşinden git!</p>
+
+            <!-- Boy-Kilo Endeksi Hesaplama -->
+            <h3>Boy-Kilo Endeksi Hesaplama</h3>
+            <form id="bkiFormCankayim" onsubmit="calculateBMI(event, 'Cankayım')">
+                <label for="height">Boy (cm):</label>
+                <input type="number" id="heightCankayim" required><br><br>
+                <label for="weight">Kilo (kg):</label>
+                <input type="number" id="weightCankayim" required><br><br>
+                <button type="submit">Hesapla</button>
+            </form>
+            <div class="result" id="resultCankayim" style="display: none;"></div>
         </div>
     </div>
 
     <!-- Babam Modal -->
-    <div id="babam" class="modal">
+    <div id="babam" class="modal babam">
         <div class="modal-content">
             <span class="close" onclick="closeModal('babam')">&times;</span>
             <h3>Babam</h3>
             <p><strong>Doğum Yılı:</strong> 1978</p>
-            <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru. Şu anda beden öğretmeni olarak çalışıyor. İyi niyetli ama sabırsız bir adam. Her zaman ailesinin en iyisini istemesiyle bilinir; ancak bazen sabırsızlığı işleri zorlaştırabilir.</p>
-            <p><strong>Dikkat Edin:</strong> Babacığım, düşüncelerinle oğullarını anlamaya çalış; bu, aranızdaki iletişimi güçlendirecektir! Belki daha az sinirlenir, daha çok gülümsemeye başlarsın. Aile içinde anlayış ve sevgi her zaman kazandırır! 👨‍👦</p>
+            <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru. Şu anda beden öğretmeni olarak çalışıyor. İyi niyetli ama sabırsız bir adam.</p>
+            <p class="love-message">Canım babam, seninle her anım çok değerli! İyi ki varsın!</p>
+
+            <!-- Boy-Kilo Endeksi Hesaplama -->
+            <h3>Boy-Kilo Endeksi Hesaplama</h3>
+            <form id="bkiFormBabam" onsubmit="calculateBMI(event, 'Babam')">
+                <label for="height">Boy (cm):</label>
+                <input type="number" id="heightBabam" required><br><br>
+                <label for="weight">Kilo (kg):</label>
+                <input type="number" id="weightBabam" required><br><br>
+                <button type="submit">Hesapla</button>
+            </form>
+            <div class="result" id="resultBabam" style="display: none;"></div>
         </div>
     </div>
 
     <!-- Anacığım Modal -->
-    <div id="anacigim" class="modal">
+    <div id="anacigim" class="modal anacigim">
         <div class="modal-content">
             <span class="close" onclick="closeModal('anacigim')">&times;</span>
             <h3>Anacığım</h3>
             <p><strong>Doğum Yılı:</strong> 1978</p>
-            <p><strong>Tanım:</strong> Anacığım, iyi niyetli ve düşünceli bir öğretmen. Her koşulda babamızın yanında olmaya çalışan, ailemizi bir arada tutan kişidir. Aile içindeki sevgi ve bağlılığı her zaman hissettiren bir anne. Aile için her şeyi göze alır, ama kendi mutluluğunu unutmamalıdır.</p>
-            <p><strong>Dikkat Edin:</strong> Anacığım, her zaman düşünceli ol; ama unutma, bazen kendin için de bir şeyler yapmalısın! Ailede herkesin mutluluğu önemlidir, ama senin de mutlu olman gerekiyor! 🌼</p>
+            <p><strong>Tanım:</strong> Anacığım, iyi niyetli ve düşünceli bir öğretmen. Aile içindeki sevgi ve bağlılığı her zaman hissettiren bir anne.</p>
+            <p class="love-message">Sevgili annem, senin sevgine her zaman ihtiyacım var! Çok özelsin!</p>
+
+            <!-- Boy-Kilo Endeksi Hesaplama -->
+            <h3>Boy-Kilo Endeksi Hesaplama</h3>
+            <form id="bkiFormAnacigim" onsubmit="calculateBMI(event, 'Anacığım')">
+                <label for="height">Boy (cm):</label>
+                <input type="number" id="heightAnacigim" required><br><br>
+                <label for="weight">Kilo (kg):</label>
+                <input type="number" id="weightAnacigim" required><br><br>
+                <button type="submit">Hesapla</button>
+            </form>
+            <div class="result" id="resultAnacigim" style="display: none;"></div>
         </div>
-    </div>
-
-    <!-- Boy-Kilo Endeksi Hesaplama -->
-    <div class="result">
-        <h3>Boy-Kilo Endeksi Hesaplama</h3>
-        <form id="bkiForm">
-            <label for="height">Boy (cm):</label>
-            <input type="number" id="height" required><br><br>
-            <label for="weight">Kilo (kg):</label>
-            <input type="number" id="weight" required><br><br>
-            <button type="submit">Hesapla</button>
-        </form>
-
-        <div class="result" id="result" style="display: none;"></div>
     </div>
 
     <script>
         // Modal açma fonksiyonu
         function openModal(id) {
-            document.getElementById(id).style.display = "block";
-        }
-
-        // Modal kapama fonksiyonu
-        function closeModal(id) {
-            document.getElementById(id).style.display = "none";
-        }
-
-        // Modal dışına tıklayınca kapatma
-        window.onclick = function(event) {
-            const modals = document.getElementsByClassName('modal');
-            for (let i = 0; i < modals.length; i++) {
-                if (event.target === modals[i]) {
-                    modals[i].style.display = "none";
-                }
-            }
-        }
-
-        // Boy-Kilo Endeksi Hesaplama
-        document.getElementById('bkiForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const height = parseFloat(document.getElementById('height').value) / 100; // cm to m
-            const weight = parseFloat(document.getElementById('weight').value);
-
-            const bmi = (weight / (height * height)).toFixed(2);
-            let category = '';
-
-            if (bmi < 18.5) {
-                category = 'Zayıf';
-            } else if (bmi >= 18.5 && bmi < 24.9) {
-                category = 'Normal';
-            } else if (bmi >= 25 && bmi < 29.9) {
-                category = 'Fazla Kilolu';
-            } else {
-                category = 'Obez';
-            }
-
-            document.getElementById('result').innerHTML = `
-                <h3>Sonuç</h3>
-                <p>Vücut Kitle İndeksiniz (BMI): ${bmi}</p>
-                <p>Kategori: ${category}</p>
-            `;
-            document.getElementById('result').style.display = 'block';
-        });
-    </script>
-</body>
-</html>
+            document.getElementBy
