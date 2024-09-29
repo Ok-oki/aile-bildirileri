@@ -18,13 +18,51 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .notification {
-            background-color: #e7f3fe;
-            border: 1px solid #b8daff;
+        .button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             border-radius: 5px;
-            margin: 10px 0;
-            padding: 15px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .modal {
             display: none; /* Başlangıçta gizli */
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            border-radius: 5px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
         .result {
             margin-top: 20px;
@@ -33,12 +71,6 @@
             border: 1px solid #b8daff;
             border-radius: 5px;
         }
-        button {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -46,33 +78,42 @@
 
     <!-- Menü -->
     <div class="menu">
-        <button onclick="showNotification('cankayim')">Cankayım</button>
-        <button onclick="showNotification('babam')">Babam</button>
-        <button onclick="showNotification('anacigim')">Anacığım</button>
+        <button class="button" onclick="openModal('cankayim')">Cankayım</button>
+        <button class="button" onclick="openModal('babam')">Babam</button>
+        <button class="button" onclick="openModal('anacigim')">Anacığım</button>
     </div>
 
-    <!-- Cankayım Bildirisi -->
-    <div class="notification" id="cankayim">
-        <h3>Cankayım</h3>
-        <p><strong>Doğum Yılı:</strong> 2010</p>
-        <p><strong>Tanım:</strong> Cankayım, genç yaşına rağmen büyük hayalleri olan bir çocuk. Kumral saçları ve parlayan yeşil gözleriyle dikkat çeken Cankayım, futbol oynamayı tutku haline getirmiş durumda. Saha onun ikinci evi gibi! Ancak balık tutma konusunda pek şanslı değil; sanki balıklar onu görünce “Burada ne yapıyorsun?” diye kaçıyorlar. Ama pes etmek yok, değil mi?</p>
-        <p><strong>Dikkat Edin:</strong> Cankayım, balık tutmayı öğrenmekte ısrar et; belki bir gün o büyük balığı yakalayabilirsin! Unutma, denizlerdeki balıklar bazen insanları şaşırtabilir. Kendi balık hikayelerini bir gün arkadaşlarına anlatacak kadar eğlenceli olacağına inanıyorum! İleride, denizden çıkardığın balıkları, şansına ve azmine göre "Bunlar benim en büyük arkadaşlarım!" diyerek sunacaksın! 🐟💨</p>
+    <!-- Cankayım Modal -->
+    <div id="cankayim" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cankayim')">&times;</span>
+            <h3>Cankayım</h3>
+            <p><strong>Doğum Yılı:</strong> 2010</p>
+            <p><strong>Tanım:</strong> Cankayım, genç yaşına rağmen büyük hayalleri olan bir çocuk. Kumral saçları ve parlayan yeşil gözleriyle dikkat çeken Cankayım, futbol oynamayı tutku haline getirmiş durumda. Saha onun ikinci evi gibi! Ancak balık tutma konusunda pek şanslı değil; sanki balıklar onu görünce “Burada ne yapıyorsun?” diye kaçıyorlar. Ama pes etmek yok, değil mi?</p>
+            <p><strong>Dikkat Edin:</strong> Cankayım, balık tutmayı öğrenmekte ısrar et; belki bir gün o büyük balığı yakalayabilirsin! Unutma, denizlerdeki balıklar bazen insanları şaşırtabilir. Kendi balık hikayelerini bir gün arkadaşlarına anlatacak kadar eğlenceli olacağına inanıyorum! İleride, denizden çıkardığın balıkları, şansına ve azmine göre "Bunlar benim en büyük arkadaşlarım!" diyerek sunacaksın! 🐟💨</p>
+        </div>
     </div>
 
-    <!-- Babam Bildirisi -->
-    <div class="notification" id="babam">
-        <h3>Babam</h3>
-        <p><strong>Doğum Yılı:</strong> 1978</p>
-        <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru. Şu anda beden öğretmeni olarak çalışıyor. İyi niyetli ama sabırsız bir adam. Her zaman ailesinin en iyisini istemesiyle bilinir; ancak bazen sabırsızlığı işleri zorlaştırabilir.</p>
-        <p><strong>Dikkat Edin:</strong> Babacığım, düşüncelerinle oğullarını anlamaya çalış; bu, aranızdaki iletişimi güçlendirecektir! Belki daha az sinirlenir, daha çok gülümsemeye başlarsın. Aile içinde anlayış ve sevgi her zaman kazandırır! 👨‍👦</p>
+    <!-- Babam Modal -->
+    <div id="babam" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('babam')">&times;</span>
+            <h3>Babam</h3>
+            <p><strong>Doğum Yılı:</strong> 1978</p>
+            <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru. Şu anda beden öğretmeni olarak çalışıyor. İyi niyetli ama sabırsız bir adam. Her zaman ailesinin en iyisini istemesiyle bilinir; ancak bazen sabırsızlığı işleri zorlaştırabilir.</p>
+            <p><strong>Dikkat Edin:</strong> Babacığım, düşüncelerinle oğullarını anlamaya çalış; bu, aranızdaki iletişimi güçlendirecektir! Belki daha az sinirlenir, daha çok gülümsemeye başlarsın. Aile içinde anlayış ve sevgi her zaman kazandırır! 👨‍👦</p>
+        </div>
     </div>
 
-    <!-- Anacığım Bildirisi -->
-    <div class="notification" id="anacigim">
-        <h3>Anacığım</h3>
-        <p><strong>Doğum Yılı:</strong> 1978</p>
-        <p><strong>Tanım:</strong> Anacığım, iyi niyetli ve düşünceli bir öğretmen. Her koşulda babamızın yanında olmaya çalışan, ailemizi bir arada tutan kişidir. Aile içindeki sevgi ve bağlılığı her zaman hissettiren bir anne. Aile için her şeyi göze alır, ama kendi mutluluğunu unutmamalıdır.</p>
-        <p><strong>Dikkat Edin:</strong> Anacığım, her zaman düşünceli ol; ama unutma, bazen kendin için de bir şeyler yapmalısın! Ailede herkesin mutluluğu önemlidir, ama senin de mutlu olman gerekiyor! 🌼</p>
+    <!-- Anacığım Modal -->
+    <div id="anacigim" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('anacigim')">&times;</span>
+            <h3>Anacığım</h3>
+            <p><strong>Doğum Yılı:</strong> 1978</p>
+            <p><strong>Tanım:</strong> Anacığım, iyi niyetli ve düşünceli bir öğretmen. Her koşulda babamızın yanında olmaya çalışan, ailemizi bir arada tutan kişidir. Aile içindeki sevgi ve bağlılığı her zaman hissettiren bir anne. Aile için her şeyi göze alır, ama kendi mutluluğunu unutmamalıdır.</p>
+            <p><strong>Dikkat Edin:</strong> Anacığım, her zaman düşünceli ol; ama unutma, bazen kendin için de bir şeyler yapmalısın! Ailede herkesin mutluluğu önemlidir, ama senin de mutlu olman gerekiyor! 🌼</p>
+        </div>
     </div>
 
     <!-- Boy-Kilo Endeksi Hesaplama -->
@@ -90,13 +131,24 @@
     </div>
 
     <script>
-        // Bildirimi gösterme fonksiyonu
-        function showNotification(id) {
-            const notifications = document.querySelectorAll('.notification');
-            notifications.forEach(notification => {
-                notification.style.display = 'none'; // Tüm bildirileri gizle
-            });
-            document.getElementById(id).style.display = 'block'; // Seçilen bildiriyi göster
+        // Modal açma fonksiyonu
+        function openModal(id) {
+            document.getElementById(id).style.display = "block";
+        }
+
+        // Modal kapama fonksiyonu
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        // Modal dışına tıklayınca kapatma
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target === modals[i]) {
+                    modals[i].style.display = "none";
+                }
+            }
         }
 
         // Boy-Kilo Endeksi Hesaplama
