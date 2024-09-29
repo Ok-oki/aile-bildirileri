@@ -14,15 +14,17 @@
         h2 {
             text-align: center;
         }
+        .menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         .notification {
             background-color: #e7f3fe;
             border: 1px solid #b8daff;
             border-radius: 5px;
             margin: 10px 0;
             padding: 15px;
-        }
-        .bki-form {
-            margin: 20px 0;
+            display: none; /* Başlangıçta gizli */
         }
         .result {
             margin-top: 20px;
@@ -31,13 +33,26 @@
             border: 1px solid #b8daff;
             border-radius: 5px;
         }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h2>Aile Bildirileri</h2>
 
+    <!-- Menü -->
+    <div class="menu">
+        <button onclick="showNotification('cankayim')">Cankayım</button>
+        <button onclick="showNotification('babam')">Babam</button>
+        <button onclick="showNotification('anacigim')">Anacığım</button>
+    </div>
+
     <!-- Cankayım Bildirisi -->
-    <div class="notification">
+    <div class="notification" id="cankayim">
         <h3>Cankayım</h3>
         <p><strong>Doğum Yılı:</strong> 2010</p>
         <p><strong>Tanım:</strong> Cankayım, genç yaşına rağmen büyük hayalleri olan bir çocuk. Kumral saçları ve parlayan yeşil gözleriyle dikkat çeken Cankayım, futbol oynamayı tutku haline getirmiş durumda. Saha onun ikinci evi gibi! Ancak balık tutma konusunda pek şanslı değil; sanki balıklar onu görünce “Burada ne yapıyorsun?” diye kaçıyorlar. Ama pes etmek yok, değil mi?</p>
@@ -45,23 +60,23 @@
     </div>
 
     <!-- Babam Bildirisi -->
-    <div class="notification">
+    <div class="notification" id="babam">
         <h3>Babam</h3>
         <p><strong>Doğum Yılı:</strong> 1978</p>
-        <p><strong>Tanım:</strong> Babam, hem bir baba hem de bir öğretmen olarak hayatına yön veren bir adam. Geçmişte itfaiye memuru olarak çalışmış olan babam, şimdi beden eğitimi öğretmeni olarak gençlerin hayatlarına dokunuyor. Kira işleriyle uğraşırken, çocuklarına karşı sabırsızlığı sıkça kendini gösteriyor. Yine de, iyi niyetli ve sevecen bir baba olması onu her zaman farklı kılıyor.</p>
-        <p><strong>Dikkat Edin:</strong> Oğullarını anlamaya çalışırken, unutma ki onların gözünden bakmak her zaman kolay değil! Geçmişte yaşadığın gençlik anılarını onlarla paylaşmak, aranızdaki bağı güçlendirebilir. Belki de, "Ben de senin yaşındayken böyle düşünmüştüm," diyerek onları daha iyi anlayabilir ve kendi tecrübelerinle rehberlik edebilirsin. Sonuçta, çocuklar babalarının hikayelerini duymayı severler! Unutma, sabır en büyük erdemdir; bazen en iyi şeyleri beklemek gerek! 😅</p>
+        <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru. Şu anda beden öğretmeni olarak çalışıyor. İyi niyetli ama sabırsız bir adam. Her zaman ailesinin en iyisini istemesiyle bilinir; ancak bazen sabırsızlığı işleri zorlaştırabilir.</p>
+        <p><strong>Dikkat Edin:</strong> Babacığım, düşüncelerinle oğullarını anlamaya çalış; bu, aranızdaki iletişimi güçlendirecektir! Belki daha az sinirlenir, daha çok gülümsemeye başlarsın. Aile içinde anlayış ve sevgi her zaman kazandırır! 👨‍👦</p>
     </div>
 
     <!-- Anacığım Bildirisi -->
-    <div class="notification">
+    <div class="notification" id="anacigim">
         <h3>Anacığım</h3>
         <p><strong>Doğum Yılı:</strong> 1978</p>
-        <p><strong>Tanım:</strong> Anacığım, ailenin kalbi ve öğretmeni. İyi niyetli ve düşünceli birisi olarak, çocuklarına ve eşine olan sevgisiyle aileyi bir arada tutan bağdır. Her durumda babanın yanında olmaya çalışan, sıcak ve destekleyici bir anne. Kendisi, çocuklarının eğitimine büyük önem veriyor ve onlara en iyi şekilde rehberlik etmeye çalışıyor. Bazen kendini ihmal etse de, ailenin mutluluğu onun önceliği.</p>
-        <p><strong>Dikkat Edin:</strong> Anacığım, her zaman düşünceli olmanın yanı sıra, kendine de zaman ayırmayı unutmamalısın! Aile mutluluğu için savaştığın kadar, kendi ihtiyaçlarını da gözetmek önemlidir. Kendine zaman ayırdığında, ailen için daha iyi bir destek olabilirsin. “Önce kendine iyi bak, sonra başkalarına!” unutmaman gereken bir hatırlatmadır. Kendini önemsemezsen, ailenin de seni önemsemesini bekleyemezsin. 🌼💪</p>
+        <p><strong>Tanım:</strong> Anacığım, iyi niyetli ve düşünceli bir öğretmen. Her koşulda babamızın yanında olmaya çalışan, ailemizi bir arada tutan kişidir. Aile içindeki sevgi ve bağlılığı her zaman hissettiren bir anne. Aile için her şeyi göze alır, ama kendi mutluluğunu unutmamalıdır.</p>
+        <p><strong>Dikkat Edin:</strong> Anacığım, her zaman düşünceli ol; ama unutma, bazen kendin için de bir şeyler yapmalısın! Ailede herkesin mutluluğu önemlidir, ama senin de mutlu olman gerekiyor! 🌼</p>
     </div>
 
     <!-- Boy-Kilo Endeksi Hesaplama -->
-    <div class="bki-form">
+    <div class="result">
         <h3>Boy-Kilo Endeksi Hesaplama</h3>
         <form id="bkiForm">
             <label for="height">Boy (cm):</label>
@@ -75,6 +90,16 @@
     </div>
 
     <script>
+        // Bildirimi gösterme fonksiyonu
+        function showNotification(id) {
+            const notifications = document.querySelectorAll('.notification');
+            notifications.forEach(notification => {
+                notification.style.display = 'none'; // Tüm bildirileri gizle
+            });
+            document.getElementById(id).style.display = 'block'; // Seçilen bildiriyi göster
+        }
+
+        // Boy-Kilo Endeksi Hesaplama
         document.getElementById('bkiForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
