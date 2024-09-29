@@ -6,26 +6,36 @@
     <title>Aile Bildirileri</title>
     <style>
         body {
-            font-family: 'Courier New', Courier, monospace; /* Hacker fontu */
+            font-family: 'Arial', sans-serif; /* Daha modern bir font */
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a; /* Ana sayfa için koyu arka plan */
-            color: #ffffff; /* Yazı rengi */
-            position: relative; /* Kenarlara yerleştirilecek yazılar için */
+            background-color: #f4f4f4; /* Açık gri arka plan */
+            color: #333; /* Koyu yazı rengi */
+            line-height: 1.6; /* Daha okunabilir satır yüksekliği */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         h2 {
             text-align: center;
+            color: #007BFF; /* Mavi renk */
         }
+
         .notification {
-            background-color: #e7f3fe;
-            border: 1px solid #b8daff;
-            border-radius: 5px;
-            margin: 10px 20px;
-            padding: 15px;
+            background-color: #ffffff; /* Beyaz arka plan */
+            border: 1px solid #ddd; /* Gri kenar */
+            border-radius: 8px;
+            margin: 20px;
+            padding: 20px;
+            width: 80%; /* Genişlik ayarı */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Hafif gölge efekti */
         }
+
         .bki-form {
             margin: 20px 0;
         }
+
         .result {
             margin-top: 20px;
             padding: 10px;
@@ -33,44 +43,45 @@
             border: 1px solid #b8daff;
             border-radius: 5px;
         }
-        /* Kenar yazıları için stil */
+
         .sidebar-text {
             position: absolute;
             color: #00ff00; /* Yeşil renk */
-            font-size: 24px; /* Yazı boyutu */
+            font-size: 18px; /* Yazı boyutu */
             white-space: nowrap;
             z-index: 10;
         }
-        /* Sol kenar yazısı */
+
         .left {
             left: 10px;
             top: 10%;
             writing-mode: vertical-rl;
             transform: rotate(180deg);
         }
-        /* Sağ kenar yazısı */
+
         .right {
             right: 10px;
             top: 10%;
             writing-mode: vertical-rl;
         }
-        /* Butonlar için stil */
+
         .button {
-            background-color: #00ff00;
-            color: black;
+            background-color: #007BFF; /* Mavi buton */
+            color: white;
             border: none;
             padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 18px;
-            margin: 4px 2px;
+            margin: 10px 5px;
             cursor: pointer;
-            border-radius: 5px; /* Kenarları yuvarlat */
-            transition: background-color 0.3s; /* Hover efekti */
+            border-radius: 5px; /* Kenarları yuvarlak */
+            transition: background-color 0.3s; /* Renk geçiş efekti */
         }
+
         .button:hover {
-            background-color: #009900; /* Hover durumunda daha koyu yeşil */
+            background-color: #0056b3; /* Hover efekti */
         }
     </style>
 </head>
@@ -78,12 +89,9 @@
 
     <h2>Aile Bildirileri</h2>
     
-    <!-- Sol Kenar Yazısı -->
     <div class="sidebar-text left">Okay Ok yaparsa kaliteli yapar</div>
-    <!-- Sağ Kenar Yazısı -->
     <div class="sidebar-text right">Okay Ok yaparsa kaliteli yapar</div>
 
-    <!-- Ana Sayfa -->
     <div>
         <h3>Ana Sayfa Mesajı</h3>
         <p>Okay Ok ile yaşam kalitenizi artırın! Gelişen teknoloji ve yenilikçi fikirlerle dolu bir dünya sizi bekliyor.</p>
@@ -92,24 +100,21 @@
         <button class="button" onclick="location.href='#anacigim';">Anacığım</button>
     </div>
 
-    <h2 id="cankayim">Cankayım</h2>
-    <div class="notification">
+    <div id="cankayim" class="notification">
         <h3>Cankayım</h3>
         <p><strong>Doğum Yılı:</strong> 2010</p>
         <p><strong>Tanım:</strong> Cankayım, genç yaşında hayal gücü yüksek bir kardeşimizdir. Futbol oynamayı sever, ama balık tutmayı öğrenmeye çalışırken bazen başarılı olamayabilir. Onun eğlenceli ve neşeli tavırlarıyla hepimizin yüzünü güldürmektedir.</p>
         <p style="font-size: 20px; color: #00ff00;"><strong>Sevgi Dolu Mesaj:</strong> Cankayım, hayallerinin peşinden koşmayı asla bırakma! Balıklar seni bekliyor! 🐟</p>
     </div>
 
-    <h2 id="babam">Babam</h2>
-    <div class="notification">
+    <div id="babam" class="notification">
         <h3>Babam</h3>
         <p><strong>Doğum Yılı:</strong> 1978</p>
         <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru ve şimdi beden öğretmeni. İyi niyetli ama bazen sabırsız olabiliyor. Her zaman ailemizin destekçisi ve rehberi olmuştur.</p>
         <p style="font-size: 20px; color: #00ff00;"><strong>Sevgi Dolu Mesaj:</strong> Babam, senin güçlü ve kararlı duruşun her zaman ilham kaynağım oldu. Hayatını dolu dolu yaşa! 🌟</p>
     </div>
 
-    <h2 id="anacigim">Anacığım</h2>
-    <div class="notification">
+    <div id="anacigim" class="notification">
         <h3>Anacığım</h3>
         <p><strong>Doğum Yılı:</strong> 1978</p>
         <p><strong>Tanım:</strong> Anacığım, düşünceli bir öğretmen. Ailemizi bir arada tutmak için her zaman çabalıyor ve bizim mutluluğumuz için elinden geleni yapıyor. Kendine de zaman ayırmayı unutmamalı.</p>
