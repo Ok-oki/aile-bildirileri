@@ -68,11 +68,7 @@
             margin-top: 20px;
         }
 
-        .job {
-            margin: 5px 0;
-        }
-
-        .horoscope {
+        .job, .horoscope {
             margin: 5px 0;
         }
     </style>
@@ -102,7 +98,7 @@
 
     <div id="calendar">
         <h2>2024 Takvimi</h2>
-        <p id="calendarResults">Yıl boyunca önemli günleri burada listeleyeceğiz.</p>
+        <p id="calendarResults">2024 Yılı boyunca önemli günleri buradan takip edebilirsiniz.</p>
     </div>
 
     <div id="jobListings">
@@ -142,15 +138,14 @@
 
         // Güncel haberleri almak için API çağrısı
         async function getNews() {
-            // Buraya ücretsiz bir haber API'si kullanın
-            const newsApiUrl = 'https://api.currentsapi.services/v1/latest-news?language=tr&apiKey=YOUR_API_KEY'; // Burada uygun bir API kullanmalısınız
+            const newsApiUrl = 'https://newsapi.org/v2/top-headlines?country=tr&apiKey=YOUR_API_KEY'; // Burada uygun bir API kullanmalısınız
             try {
                 const response = await fetch(newsApiUrl);
                 if (!response.ok) {
                     throw new Error('Haber yüklenemedi.');
                 }
                 const data = await response.json();
-                const articles = data.news;
+                const articles = data.articles;
 
                 if (articles.length > 0) {
                     const newsTitles = articles.map(article => article.title).join(' • ');
@@ -178,8 +173,7 @@
 
         // Güncel iş ilanlarını ve burç yorumlarını almak için API çağrısı
         async function getJobListings() {
-            // Buraya güncel iş ilanları API'sini ekleyin
-            const jobApiUrl = 'https://api.example.com/jobs'; // Örnek URL
+            const jobApiUrl = 'https://api.example.com/jobs'; // Örnek URL, burayı güncelleyiniz
             try {
                 const response = await fetch(jobApiUrl);
                 if (!response.ok) {
@@ -196,34 +190,34 @@
 
         // Günlük burç yorumlarını almak için API çağrısı
         async function getHoroscope() {
-            // Buraya burç yorumları API'sini ekleyin
-            const horoscopeApiUrl = 'https://api.example.com/horoscope'; // Örnek URL
+            const horoscopeApiUrl = 'https://horoscope-api.herokuapp.com/horoscope/today/Aries'; // Örnek URL, burayı güncelleyiniz
             try {
                 const response = await fetch(horoscopeApiUrl);
                 if (!response.ok) {
                     throw new Error('Burç yorumları yüklenemedi.');
                 }
                 const data = await response.json();
-                const horoscope = data.horoscope.map(h => `<div class="horoscope">${h.sign}: ${h.message}</div>`).join('');
-                document.getElementById('horoscopeResults').innerHTML = horoscope;
+                document.getElementById('horoscopeResults').innerHTML = `${data.sunsign}: ${data.horoscope}`;
             } catch (error) {
                 console.error('Hata:', error);
                 document.getElementById('horoscopeResults').innerText = 'Burç yorumları yüklenemedi. Lütfen bağlantınızı kontrol edin.';
             }
         }
 
-        // Sayfa yüklendiğinde tüm fonksiyonları çağır
-        function init() {
+        // Sayfa yüklendiğinde verileri güncelle
+        window.onload = async () => {
             updateDateTime();
-            setInterval(updateDateTime, 1000);
             getExchangeRate();
             getNews();
-            getJobListings();
-            getHoroscope();
-        }
-
-        // Sayfa yüklendiğinde başlat
-        window.onload = init;
+            await getJobListings();
+            await getHoroscope();
+            setInterval(updateDateTime, 1000); // Her saniye güncelle
+            setInterval(getExchangeRate, 3600000); // Her saat güncelle
+            setInterval(getNews, 600000); // Her 10 dakikada bir güncelle
+            setInterval(getJobListings, 600000); // Her 10 dakikada bir güncelle
+            setInterval(getHoroscope, 86400000); // Her gün güncelle
+        };
     </script>
+
 </body>
 </html>
