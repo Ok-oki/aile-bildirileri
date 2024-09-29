@@ -6,64 +6,25 @@
     <title>Aile Bildirileri</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #282c34; /* Ana sayfa için koyu arka plan */
-            color: white; /* Yazı rengi beyaz */
+            font-family: 'Courier New', Courier, monospace; /* Hacker fontu */
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Ana sayfa için koyu arka plan */
+            color: #ffffff; /* Yazı rengi */
+            position: relative; /* Kenarlara yerleştirilecek yazılar için */
         }
         h2 {
             text-align: center;
         }
-        .menu {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .button {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50; /* Buton rengi */
-            color: white;
-            border: none;
+        .notification {
+            background-color: #e7f3fe;
+            border: 1px solid #b8daff;
             border-radius: 5px;
+            margin: 10px 20px;
+            padding: 15px;
         }
-        .button:hover {
-            background-color: #45a049; /* Buton hover rengi */
-        }
-        .modal {
-            display: none; /* Başlangıçta gizli */
-            position: fixed; 
-            z-index: 1; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto; 
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; 
-            border-radius: 5px;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        .bki-form {
+            margin: 20px 0;
         }
         .result {
             margin-top: 20px;
@@ -72,117 +33,83 @@
             border: 1px solid #b8daff;
             border-radius: 5px;
         }
-        .love-message {
-            font-size: 24px; /* Mesaj için büyük font boyutu */
-            color: #4CAF50; /* Mesaj için yeşil renk */
+        /* Kenar yazıları için stil */
+        .sidebar-text {
+            position: absolute;
+            color: #00ff00; /* Yeşil renk */
+            font-size: 24px; /* Yazı boyutu */
+            white-space: nowrap;
+            z-index: 10;
+        }
+        /* Sol kenar yazısı */
+        .left {
+            left: 10px;
+            top: 10%;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+        /* Sağ kenar yazısı */
+        .right {
+            right: 10px;
+            top: 10%;
+            writing-mode: vertical-rl;
+        }
+        /* Butonlar için stil */
+        .button {
+            background-color: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
             text-align: center;
-            margin-top: 20px;
-        }
-        /* Bayrak ve hacker simgesi için stil */
-        .icon-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .icon {
-            width: 50px; /* Simge boyutu */
-            height: auto;
-            margin: 0 10px; /* Simgeler arasında boşluk */
-        }
-        /* Özel sayfa arka plan renkleri */
-        .cankayim {
-            background-color: #ff6347; /* Cankayım için arka plan rengi */
-        }
-        .babam {
-            background-color: #4682b4; /* Babam için arka plan rengi */
-        }
-        .anacigim {
-            background-color: #ffcc00; /* Anacığım için arka plan rengi */
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+
     <h2>Aile Bildirileri</h2>
+    
+    <!-- Sol Kenar Yazısı -->
+    <div class="sidebar-text left">Okay Ok yaparsa kaliteli yapar</div>
+    <!-- Sağ Kenar Yazısı -->
+    <div class="sidebar-text right">Okay Ok yaparsa kaliteli yapar</div>
 
-    <!-- Bayrak ve hacker simgesi -->
-    <div class="icon-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_the_Turkish_Republic_of_Northern_Cyprus.svg" alt="KKTC Bayrağı" class="icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Hacker.svg/512px-Hacker.svg.png" alt="Hacker Simgesi" class="icon">
+    <!-- Ana Sayfa -->
+    <div>
+        <h3>Ana Sayfa Mesajı</h3>
+        <p>Okay Ok ile yaşam kalitenizi artırın! Gelişen teknoloji ve yenilikçi fikirlerle dolu bir dünya sizi bekliyor.</p>
+        <button class="button" onclick="location.href='#cankayim';">Cankayım</button>
+        <button class="button" onclick="location.href='#babam';">Babam</button>
+        <button class="button" onclick="location.href='#anacigim';">Anacığım</button>
     </div>
 
-    <!-- Menü -->
-    <div class="menu">
-        <button class="button" onclick="openModal('cankayim')">Cankayım</button>
-        <button class="button" onclick="openModal('babam')">Babam</button>
-        <button class="button" onclick="openModal('anacigim')">Anacığım</button>
+    <h2 id="cankayim">Cankayım</h2>
+    <div class="notification">
+        <h3>Cankayım</h3>
+        <p><strong>Doğum Yılı:</strong> 2010</p>
+        <p><strong>Tanım:</strong> Cankayım, genç yaşında hayal gücü yüksek bir kardeşimizdir. Futbol oynamayı sever, ama balık tutmayı öğrenmeye çalışırken bazen başarılı olamayabilir. Onun eğlenceli ve neşeli tavırlarıyla hepimizin yüzünü güldürmektedir.</p>
+        <p style="font-size: 20px; color: #00ff00;"><strong>Sevgi Dolu Mesaj:</strong> Cankayım, hayallerinin peşinden koşmayı asla bırakma! Balıklar seni bekliyor! 🐟</p>
     </div>
 
-    <!-- Cankayım Modal -->
-    <div id="cankayim" class="modal cankayim">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('cankayim')">&times;</span>
-            <h3>Cankayım</h3>
-            <p><strong>Doğum Yılı:</strong> 2010</p>
-            <p><strong>Tanım:</strong> Cankayım, genç yaşına rağmen büyük hayalleri olan bir çocuk. Kumral saçları ve parlayan yeşil gözleriyle dikkat çeken Cankayım, futbol oynamayı tutku haline getirmiş durumda.</p>
-            <p class="love-message">Seni çok seviyorum, Cankayım! Her zaman hayallerinin peşinden git!</p>
-
-            <!-- Boy-Kilo Endeksi Hesaplama -->
-            <h3>Boy-Kilo Endeksi Hesaplama</h3>
-            <form id="bkiFormCankayim" onsubmit="calculateBMI(event, 'Cankayım')">
-                <label for="height">Boy (cm):</label>
-                <input type="number" id="heightCankayim" required><br><br>
-                <label for="weight">Kilo (kg):</label>
-                <input type="number" id="weightCankayim" required><br><br>
-                <button type="submit">Hesapla</button>
-            </form>
-            <div class="result" id="resultCankayim" style="display: none;"></div>
-        </div>
+    <h2 id="babam">Babam</h2>
+    <div class="notification">
+        <h3>Babam</h3>
+        <p><strong>Doğum Yılı:</strong> 1978</p>
+        <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru ve şimdi beden öğretmeni. İyi niyetli ama bazen sabırsız olabiliyor. Her zaman ailemizin destekçisi ve rehberi olmuştur.</p>
+        <p style="font-size: 20px; color: #00ff00;"><strong>Sevgi Dolu Mesaj:</strong> Babam, senin güçlü ve kararlı duruşun her zaman ilham kaynağım oldu. Hayatını dolu dolu yaşa! 🌟</p>
     </div>
 
-    <!-- Babam Modal -->
-    <div id="babam" class="modal babam">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('babam')">&times;</span>
-            <h3>Babam</h3>
-            <p><strong>Doğum Yılı:</strong> 1978</p>
-            <p><strong>Tanım:</strong> Babam, kira işleri ile ilgilenen eski bir itfaiye memuru. Şu anda beden öğretmeni olarak çalışıyor. İyi niyetli ama sabırsız bir adam.</p>
-            <p class="love-message">Canım babam, seninle her anım çok değerli! İyi ki varsın!</p>
-
-            <!-- Boy-Kilo Endeksi Hesaplama -->
-            <h3>Boy-Kilo Endeksi Hesaplama</h3>
-            <form id="bkiFormBabam" onsubmit="calculateBMI(event, 'Babam')">
-                <label for="height">Boy (cm):</label>
-                <input type="number" id="heightBabam" required><br><br>
-                <label for="weight">Kilo (kg):</label>
-                <input type="number" id="weightBabam" required><br><br>
-                <button type="submit">Hesapla</button>
-            </form>
-            <div class="result" id="resultBabam" style="display: none;"></div>
-        </div>
+    <h2 id="anacigim">Anacığım</h2>
+    <div class="notification">
+        <h3>Anacığım</h3>
+        <p><strong>Doğum Yılı:</strong> 1978</p>
+        <p><strong>Tanım:</strong> Anacığım, düşünceli bir öğretmen. Ailemizi bir arada tutmak için her zaman çabalıyor ve bizim mutluluğumuz için elinden geleni yapıyor. Kendine de zaman ayırmayı unutmamalı.</p>
+        <p style="font-size: 20px; color: #00ff00;"><strong>Sevgi Dolu Mesaj:</strong> Anacığım, senin özverin ve sevgilerin bizim için her şeyden değerli. Kendi mutluluğunu da unutma! 🌼</p>
     </div>
 
-    <!-- Anacığım Modal -->
-    <div id="anacigim" class="modal anacigim">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('anacigim')">&times;</span>
-            <h3>Anacığım</h3>
-            <p><strong>Doğum Yılı:</strong> 1978</p>
-            <p><strong>Tanım:</strong> Anacığım, iyi niyetli ve düşünceli bir öğretmen. Aile içindeki sevgi ve bağlılığı her zaman hissettiren bir anne.</p>
-            <p class="love-message">Sevgili annem, senin sevgine her zaman ihtiyacım var! Çok özelsin!</p>
-
-            <!-- Boy-Kilo Endeksi Hesaplama -->
-            <h3>Boy-Kilo Endeksi Hesaplama</h3>
-            <form id="bkiFormAnacigim" onsubmit="calculateBMI(event, 'Anacığım')">
-                <label for="height">Boy (cm):</label>
-                <input type="number" id="heightAnacigim" required><br><br>
-                <label for="weight">Kilo (kg):</label>
-                <input type="number" id="weightAnacigim" required><br><br>
-                <button type="submit">Hesapla</button>
-            </form>
-            <div class="result" id="resultAnacigim" style="display: none;"></div>
-        </div>
-    </div>
-
-    <script>
-        // Modal açma fonksiyonu
-        function openModal(id) {
-            document.getElementBy
+</body>
+</html>
