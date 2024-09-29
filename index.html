@@ -3,135 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okay OK - Güncel Haberler</title>
+    <title>Okcan Teknoloji</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4; /* Arka plan rengi */
+            background-color: #f4f4f4;
         }
 
         h1 {
             text-align: center;
+            color: #007bff;
         }
 
-        #newsTicker {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            background: #007bff; /* Mavi arka plan */
-            color: white; /* Beyaz yazı rengi */
-            padding: 10px;
-            border-radius: 5px; /* Kenar yuvarlama */
-            font-size: 20px; /* Yazı boyutu */
-            animation: ticker 15s linear infinite; /* Kaydırma hızı */
-        }
-
-        @keyframes ticker {
-            from { transform: translateX(100%); } /* Başlangıç noktası */
-            to { transform: translateX(-100%); } /* Bitiş noktası */
-        }
-
-        #about {
-            margin: 20px 0;
+        #bmiCalculator {
+            margin-top: 20px;
             padding: 15px;
-            background-color: #e2e2e2; /* Açık gri arka plan */
-            border: 1px solid #ccc; /* Kenar çizgisi */
-            border-radius: 5px; /* Kenar yuvarlama */
-            font-size: 18px; /* Yazı boyutu */
+            background-color: #e2e2e2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        #info {
-            font-weight: bold; /* Kalın yazı */
-            color: #007bff; /* Mavi renk */
+        input[type="number"] {
+            width: 80px;
+            margin-right: 10px;
         }
 
-        #dateTime, #exchangeRate {
-            font-size: 24px; /* Yazı boyutu */
-            text-align: right; /* Sağda hizala */
-            margin-bottom: 20px; /* Alt boşluk */
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        #lastUpdated {
-            position: absolute; /* Sayfanın en üst kısmında konumlandır */
-            top: 10px;
-            right: 10px;
-            font-size: 12px; /* Küçük yazı boyutu */
-            color: #888; /* Gri renk */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #twitterTopics, #instagramPosts {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
 
-    <div id="lastUpdated">Son Güncelleme: Loading...</div>
-    <h1>Okay OK ile Güncel Haberler</h1>
-    <div id="dateTime">Tarih/Saat: Loading...</div>
-    <div id="exchangeRate">Döviz Kuru: Loading...</div>
-    <div id="newsTicker">Haber yükleniyor...</div>
+    <h1>Okcan Teknoloji</h1>
 
-    <div id="about">
-        <p id="info">Okay OK Hakkında:</p>
-        <p>Daha yeni başlıyoruz... Acemiyim 😉</p>
+    <div id="bmiCalculator">
+        <h2>Boy-Kilo İndeksi Hesaplama</h2>
+        <label for="weight">Kilonuzu (kg) girin:</label>
+        <input type="number" id="weight" placeholder="Kilo" required />
+        <br>
+        <label for="height">Boyunuzu (cm) girin:</label>
+        <input type="number" id="height" placeholder="Boy" required />
+        <br>
+        <button onclick="calculateBMI()">Hesapla</button>
+        <p id="bmiResult"></p>
+    </div>
+
+    <div id="twitterTopics">
+        <h3>Güncel Twitter Konuları:</h3>
+        <ul id="twitterList">Yükleniyor...</ul>
+    </div>
+
+    <div id="instagramPosts">
+        <h3>Okcan Teknoloji Instagram Postları:</h3>
+        <ul id="instagramList">Yükleniyor...</ul>
     </div>
 
     <script>
-        // Tarih ve saati güncelleme
-        function updateDateTime() {
-            const now = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            document.getElementById('dateTime').innerText = `Tarih/Saat: ${now.toLocaleString('tr-TR', options)}`;
-            document.getElementById('lastUpdated').innerText = `Son Güncelleme: ${now.toLocaleString('tr-TR', options)}`;
-        }
-
-        // Döviz kurunu almak için API çağrısı
-        async function getExchangeRate() {
-            try {
-                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD'); // USD baz alınarak döviz kuru alınıyor
-                if (!response.ok) {
-                    throw new Error('Döviz kuru yüklenemedi.');
-                }
-                const data = await response.json();
-                const rate = data.rates.TRY; // TL kuru
-                document.getElementById('exchangeRate').innerText = `Döviz Kuru: 1 USD = ${rate.toFixed(2)} TL`; // Döviz kuru güncelle
-            } catch (error) {
-                console.error('Döviz kuru hatası:', error);
-                document.getElementById('exchangeRate').innerText = 'Döviz Kuru yüklenemedi. Lütfen bağlantınızı kontrol edin veya API hizmetini kontrol edin.';
+        // Boy Kilo İndeksi Hesaplama
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // cm to m
+            if (isNaN(weight) || isNaN(height) || height <= 0) {
+                document.getElementById('bmiResult').innerText = 'Lütfen geçerli bir kilo ve boy girin.';
+                return;
             }
+            const bmi = weight / (height * height);
+            document.getElementById('bmiResult').innerText = `BMI: ${bmi.toFixed(2)} (${getBMICategory(bmi)})`;
         }
 
-        // Güncel haberleri almak için API çağrısı
-        async function getNews() {
-            try {
-                const response = await fetch('https://newsapi.org/v2/top-headlines?country=tr&apiKey=40c227d5a8a74ac58dcc0769d2c3c17'); // API URL'si
-                if (!response.ok) {
-                    throw new Error('Haber yüklenemedi.');
-                }
-                const data = await response.json();
-                const articles = data.articles;
-
-                if (articles.length > 0) {
-                    const newsTitles = articles.map(article => article.title).join(' • '); // Başlıkları birleştir
-                    document.getElementById('newsTicker').innerText = newsTitles; // Haberleri güncelle
-                } else {
-                    document.getElementById('newsTicker').innerText = 'Güncel haber bulunamadı.';
-                }
-            } catch (error) {
-                console.error('Hata:', error);
-                document.getElementById('newsTicker').innerText = 'Haberler yüklenemedi. Lütfen API anahtarınızı kontrol edin.';
-            }
+        // BMI Kategorisi
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) return 'Zayıf';
+            if (bmi < 24.9) return 'Normal kilolu';
+            if (bmi < 29.9) return 'Fazla kilolu';
+            return 'Obez';
         }
 
-        // Sayfa yüklendiğinde tarih ve saat ile döviz kurunu güncelle
-        window.onload = () => {
-            updateDateTime();
-            getNews();
-            getExchangeRate();
-            setInterval(getNews, 60000); // 60 saniyede bir haber güncelle
-            setInterval(getExchangeRate, 60000); // 60 saniyede bir döviz kuru güncelle
-            setInterval(updateDateTime, 1000); // Her saniyede bir tarih ve saat güncelle
-        };
+        // Twitter konularını almak için örnek veri
+        async function getTwitterTopics() {
+            const exampleTopics = [
+                "Yerli otomobil tanıtımı",
+                "Kuzey Kıbrıs'ta güncel hava durumu",
+                "Yeni eğitim sistemi ile ilgili gelişmeler",
+                "2024 genel seçimleri hakkında konuşmalar"
+            ];
+            const twitterList = document.getElementById('twitterList');
+            twitterList.innerHTML = exampleTopics.map(topic => `<li>${topic}</li>`).join('');
+        }
+
+        // Instagram gönderilerini almak için örnek veri
+        async function getInstagramPosts() {
+            const examplePosts = [
+                "📸 Okcan Teknoloji'de yeni ürünler!",
+                "🌟 Müşteri memnuniyeti önceliğimizdir!",
+                "🎉 Yaz kampanyalarımıza katılın!",
+                "📱 Mi Scooter S3 satışta!"
+            ];
+            const instagramList = document.getElementById('instagramList');
+            instagramList.innerHTML = examplePosts.map(post => `<li>${post}</li>`).join('');
+        }
+
+        // Sayfa yüklendiğinde çağırılan fonksiyonlar
+        document.addEventListener('DOMContentLoaded', () => {
+            getTwitterTopics();
+            getInstagramPosts();
+        });
     </script>
-
 </body>
 </html>
