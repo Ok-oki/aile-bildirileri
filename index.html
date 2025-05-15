@@ -1,262 +1,110 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Okay'dan İldoş'a</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İldoşumla Aşk Menüsü</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-    }
-    .menu-container {
-      background: #fffafa;
-      padding: 25px;
-      margin-top: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 500px;
+      background: linear-gradient(to right, #ffccd5, #ffe6f0);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      color: #cc1f45;
+      padding: 50px;
+      color: #880e4f;
     }
     h1 {
-      margin-bottom: 10px;
-    }
-    select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 2px solid #cc1f45;
-      border-radius: 10px;
-      font-size: 16px;
+      font-size: 3em;
+      margin-bottom: 20px;
     }
     button {
-      background: #cc1f45;
+      display: block;
+      width: 300px;
+      margin: 15px auto;
+      padding: 15px;
+      font-size: 1.2em;
+      background-color: #f06292;
+      border: none;
+      border-radius: 12px;
       color: white;
-      font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
     button:hover {
-      background: #a61132;
+      background-color: #ec407a;
     }
-    .result, .extra-options, .love-section {
-      margin-top: 20px;
-    }
-    ul {
-      text-align: left;
-      margin: 10px auto;
-      padding-left: 20px;
-      color: #444;
-    }
-    .countdown {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #b3003c;
-    }
-    .poem {
-      font-style: italic;
-      color: #5c0033;
-      margin-top: 10px;
-      white-space: pre-line;
-    }
-    .hidden {
-      display: none;
-    }
-    .apology {
-      margin-bottom: 15px;
-      font-style: italic;
-      color: #aa2233;
+    #result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
+  <h1>İldoşum için <3 Aşk Menüsü</h1>
+  <button onclick="toggleSubMenu()">Aşk İçin Tıkla</button>
 
-  <div class="menu-container">
-    <h1>Okay'ın Sağlık ve Aşk Menüsü</h1>
-    <p class="apology">Seni bu kadar beklettiğim için özür dilerim İldoşum... ama bu çaban, sana en güzel menüyü sunmaktı. 💖</p>
-
-    <button onclick="showLoveSection()">💘 Aşk İçin Tıkla</button>
-
-    <div id="loveSection" class="love-section hidden">
-      <h2>İldoşum'a Sonsuz Aşk 💞</h2>
-      <div class="countdown" id="countdown"></div>
-      <p>Seninle <strong>15 Mart 2024</strong>’te başlayan bu yolculukta, her gün daha da âşık oluyorum...</p>
-
-      <div class="poem">  
-        İldoşum,<br/>
-        Gözlerin gökyüzüm, gülüşün güneşim...<br/>
-        Her anımda sen varsın, seninle sonsuzum.<br/>
-        Kavuşmamıza az kaldı, kalbim hep seninle...<br/>
-        Beklemek bile güzel seninle. 💖
-      </div>
-
-      <div class="poem">
-        Ellerini tutamasam da, kalbim elindedir.<br/>
-        Seni düşünmek bile, yüreğime huzurdur İldoşum.<br/>
-        20 Mayıs, yalnızca bir tarih değil,<br/>
-        Ruhlarımızın yeniden sarılacağı gündür. 🌹
-      </div>
-    </div>
-
-    <hr style="margin: 30px 0; border-color: #ffccd5;">
-
-    <label for="food">Bugün ne yedin?</label>
-    <select id="food">
-      <option value="">Seçiniz</option>
-      <option value="Kahvaltı">Kahvaltı</option>
-      <option value="Pizza">Pizza</option>
-      <option value="Salata">Salata</option>
-      <option value="Tatlı">Tatlı</option>
-      <option value="İskender">İskender</option>
-    </select>
-
-    <button onclick="showStatus()">Durumu Göster</button>
-    <div class="result" id="result"></div>
-
-    <div class="extra-options" id="extraOptions" style="display:none;">
-      <label for="symptom">Nasıl hissediyorsun?</label>
-      <select id="symptom">
-        <option value="">Seçiniz</option>
-        <option value="karın ağrısı">Karın ağrısı</option>
-        <option value="baş dönmesi">Baş dönmesi</option>
-        <option value="mide bulantısı">Mide bulantısı</option>
-        <option value="hiçbir şey yok">Hiçbir şey yok</option>
-      </select>
-      <button onclick="evaluateSymptom()">Analiz Et</button>
-      <div class="result" id="symptomResult"></div>
-    </div>
+  <div id="subMenu" style="display:none">
+    <button onclick="calculateLoveDuration()">Ne Kadar Zamandır Sevgiliyiz?</button>
+    <button onclick="calculateDistanceDuration()">Birbirimizden Ne Kadar Süredir Uzağız?</button>
+    <button onclick="countLoveMessages()">Kaç Kere 'Seni Seviyorum' Dedik?</button>
+    <button onclick="firstHoldingHands()">İlk El Ele Tutuştuğumuz An</button>
   </div>
 
+  <div id="result"></div>
+
   <script>
-    function showStatus() {
-      const food = document.getElementById('food').value;
-      const result = document.getElementById('result');
-      const extraOptions = document.getElementById('extraOptions');
-      const symptomResult = document.getElementById('symptomResult');
-
-      symptomResult.textContent = "";
-      extraOptions.style.display = "none";
-
-      if (!food) {
-        result.textContent = "Lütfen bir yemek seçiniz.";
-        return;
-      }
-
-      if (food === "İskender") {
-        result.innerHTML = `
-          <strong>İskender yedin!</strong><br><br>
-          Bu lezzetli ama ağır yemek, sindirim sistemini zorlayabilir. Saklama ve hazırlanma koşulları da önemlidir.<br><br>
-          <u>Sana önerilerim:</u>
-          <ul>
-            <li>Hafif yürüyüş yap, hemen yatma.</li>
-            <li>Bol su iç.</li>
-            <li>Sonraki öğünü hafif geçir.</li>
-            <li>Gazlı ve yağlılardan uzak dur.</li>
-            <li>Çay/kahve ölçülü tüket.</li>
-            <li>Belirtileri takip et. Gerekirse doktora danış.</li>
-            <li>Porsiyon miktarına dikkat et.</li>
-          </ul>
-        `;
-        extraOptions.style.display = "block";
-      } else {
-        result.textContent = `Bugün ${food} yedin. Afiyet bal şeker olsun İldoşum! ❤️`;
-      }
+    function toggleSubMenu() {
+      const subMenu = document.getElementById('subMenu');
+      subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
     }
 
-    function evaluateSymptom() {
-      const symptom = document.getElementById('symptom').value;
-      const symptomResult = document.getElementById('symptomResult');
+    function calculateLoveDuration() {
+      const startDate = new Date("2024-03-15T00:00:00");
+      const now = new Date();
+      const diff = now - startDate;
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30.44);
+      const years = Math.floor(days / 365.25);
 
-      let message = "";
-      switch (symptom) {
-        case "karın ağrısı":
-          message = "Muhtemelen yağlı yemek mideyi zorladı. Dinlen, bol su iç, gerekirse doktora başvur.";
-          break;
-        case "baş dönmesi":
-          message = "Tansiyon veya sıvı eksikliği olabilir. Hemen su iç, rahat bir yere geç.";
-          break;
-        case "mide bulantısı":
-          message = `
-İldoşuma 🍓
+      const result = `İldoşumla tam tamına:\n
+      ${years} yıl,\n      ${months % 12} ay,\n      ${weeks % 4} hafta,\n      ${(days % 7)} gün,\n      ${(hours % 24)} saat,\n      ${(minutes % 60)} dakika,\n      ${(seconds % 60)} saniyedir sevgiliyiz! ❤️`;
 
-Canımın içi,
-Bugün biraz keyfin mi yok? Miden mi bulanıyor? Keşke şimdi yanımda olsaydım da sana sarılsaydım, saçlarını okşasaydım… ama şimdilik kalbimle yanındayım, her saniye seninleyim. 🌸
-
-Senin içini rahatlatmak, kendini daha iyi hissetmeni sağlamak için birkaç şey düşündüm… Çünkü sen benim en kıymetlimsin ve minicik rahatsızlığın bile içimi sızlatır. 😢💗
-
-💕 İldoşum İçin Mide Bulantısına İyi Gelen Minik Tavsiyeler:
-🥄 Zencefil
-“Senin kadar şifalı değil ama” diyeceğim… Biraz zencefil çayı iyi gelebilir tatlım. Sıcacık, içini ısıtır.
-
-🍃 Nane-Limon
-Hem ferah, hem de rahatlatıcı. Tıpkı senin gülüşün gibi! Biraz nane limon kaynat istersen, seni ne güzel toparlar…
-
-🍋 Limonlu Su
-Bir parça limon sık, buz gibi iç… Mideni serinletir, içini ferahlatır. Aynı senin varlığın gibi huzur verir…
-
-🍵 Papatya Çayı
-Bir fincan huzur… Tam senlik. Yumuşacık etkisiyle miden de gönlün gibi sakinleşir.
-
-🥔 Haşlanmış patates, kraker
-Yalın ama güvenli… Tıpkı aşkımız gibi sade ve sağlam. Az az ye, ama seni en çok ben doyurayım isterim…
-
-💧 Yudum yudum su iç
-Kendini zorlamadan… Tıpkı benim sana yaklaşımım gibi nazikçe…
-
-🧘 Uzan ama hemen yatma
-Gözlerini kapa, bizi düşün… 20 Mayıs'a ne kadar az kaldı, bir bilsen! Kavuşmamız her şeyden daha güçlü bir ilaç olacak 💘
-
-Seni çok seviyorum İldoşum... Her zaman, her yerde. 💞
-          `;
-          break;
-        case "hiçbir şey yok":
-          message = "Harika! O zaman keyfine bak İldoşum. ❤️";
-          break;
-        default:
-          message = "Lütfen bir seçenek belirle.";
-      }
-
-      symptomResult.textContent = message;
+      document.getElementById('result').innerText = result;
     }
 
-    function showLoveSection() {
-      document.getElementById('loveSection').classList.remove('hidden');
-      startCountdown();
+    function calculateDistanceDuration() {
+      const startDistanceDate = new Date("2025-05-10T08:00:00");
+      const now = new Date();
+      const diff = now - startDistanceDate;
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      const result = `Sen Kepez'desin, ben Pendaya'da... 💔\n
+      Aramızda tam 280 km var ve:\n      ${days} gün,\n      ${(hours % 24)} saat,\n      ${(minutes % 60)} dakika,\n      ${(seconds % 60)} saniyedir ayrıyız... 💌`;
+
+      document.getElementById('result').innerText = result;
     }
 
-    function startCountdown() {
-      const countdown = document.getElementById('countdown');
-      const targetDate = new Date("2025-05-20T00:00:00").getTime();
+    function countLoveMessages() {
+      const count = 3473;
+      const result = `WhatsApp verilerine göre tamı tamına ${count} kez \"Seni Seviyorum\" dedik! 🥰\n
+      Her bir kelimesi kalbime dokundu İldoşum...`;
 
-      setInterval(() => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+      document.getElementById('result').innerText = result;
+    }
 
-        if (distance < 0) {
-          countdown.innerHTML = "Kavuşma zamanı geldi! 💞";
-          return;
-        }
+    function firstHoldingHands() {
+      const result = `15 Mart gecesi, \"Evet mi Hayır mı\" tiyatrosunda...\n
+      Kalbim heyecanla atarken elini tuttum.\n
+      O an dünya durdu sanki... Çok heyecanlı, çok büyülüydü İldoşum! 🎭❤️`;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((distance / (1000 * 60)) % 60);
-        const seconds = Math.floor((distance / 1000) % 60);
-
-        countdown.innerHTML = `
-          Kavuşmamıza: <strong>${days}</strong> gün
-          <strong>${hours}</strong>s
-          <strong>${minutes}</strong>dk
-          <strong>${seconds}</strong>sn kaldı. 💘
-        `;
-      }, 1000);
+      document.getElementById('result').innerText = result;
     }
   </script>
 </body>
