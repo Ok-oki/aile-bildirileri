@@ -46,6 +46,7 @@
       padding: 20px;
       display: inline-block;
       box-shadow: 0 0 10px pink;
+      margin-top: 20px;
     }
 
     .images {
@@ -107,8 +108,9 @@
       const minutes = Math.floor(diff / (1000 * 60));
       const seconds = Math.floor(diff / 1000);
 
-      document.getElementById('output').classList.remove('hidden');
-      document.getElementById('output').innerHTML = `
+      const output = document.getElementById('output');
+      output.classList.remove('hidden');
+      output.innerHTML = `
         <h2>👩‍❤️‍👨 Aşkımızın Süresi</h2>
         <p><strong>${years}</strong> yıl, <strong>${months}</strong> ay, <strong>${weeks}</strong> hafta,</p>
         <p><strong>${days}</strong> gün, <strong>${hours}</strong> saat, <strong>${minutes}</strong> dakika,</p>
@@ -126,8 +128,9 @@
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById('output').classList.remove('hidden');
-      document.getElementById('output').innerHTML = `
+      const output = document.getElementById('output');
+      output.classList.remove('hidden');
+      output.innerHTML = `
         <h2>📍 Uzaklığımız</h2>
         <p>Kepez'den Pendaya'ya olan 280 km'lik mesafede,</p>
         <p><strong>${days}</strong> gün <strong>${hours}</strong> saat <strong>${minutes}</strong> dakika <strong>${seconds}</strong> saniyedir</p>
@@ -136,8 +139,9 @@
     }
 
     function showMessageCount() {
-      document.getElementById('output').classList.remove('hidden');
-      document.getElementById('output').innerHTML = `
+      const output = document.getElementById('output');
+      output.classList.remove('hidden');
+      output.innerHTML = `
         <h2>💬 'Seni Seviyorum' Mesajlarımız</h2>
         <p>WhatsApp üzerinden tam <strong>3.473</strong> kez seni sevdiğimi söyledim.</p>
         <p>Yetmez... daha milyonlarca kez söyleyeceğim İldoşum! 💗</p>
@@ -145,8 +149,9 @@
     }
 
     function showFirstTouch() {
-      document.getElementById('output').classList.remove('hidden');
-      document.getElementById('output').innerHTML = `
+      const output = document.getElementById('output');
+      output.classList.remove('hidden');
+      output.innerHTML = `
         <h2>🤝 İlk El Ele Tutuşmamız</h2>
         <p>15 Mart gecesi... "Evet mi, Hayır mı?" tiyatrosunda ellerimiz buluştu.</p>
         <p>Çok heyecanlı, çok büyülü bir andı. Kalbim o an sadece sana attı İldoşum... 🌙🎭</p>
