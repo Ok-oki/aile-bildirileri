@@ -1,223 +1,157 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okay OK</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
+  <meta charset="UTF-8">
+  <title>Okay'dan Aşk Menüsü</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #ffeef2;
+      color: #b30047;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
 
-        h1, h2 {
-            text-align: center;
-        }
+    .container {
+      background: #fff0f4;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      display: none;
+    }
 
-        #newsTicker {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            background: #007bff;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 20px;
-            animation: ticker 15s linear infinite;
-        }
+    .active {
+      display: block;
+    }
 
-        @keyframes ticker {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
+    h1 {
+      margin-bottom: 10px;
+    }
 
-        #info, #calendar, #jobListings, #horoscope {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #e2e2e2;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 18px;
-        }
+    p {
+      margin-bottom: 20px;
+    }
 
-        #dateTime, #exchangeRate {
-            font-size: 24px;
-            text-align: right;
-            margin-bottom: 20px;
-        }
+    button {
+      background-color: #d2004c;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
 
-        #lastUpdated {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: #888;
-        }
+    button:hover {
+      background-color: #a10039;
+    }
 
-        #okcanInfo {
-            background-color: #ffcc00;
-            padding: 10px;
-            margin: 20px 0;
-            border-radius: 5px;
-            text-align: center;
-        }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 2px solid #d2004c;
+    }
 
-        #birthCalculator {
-            margin-top: 20px;
-        }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
 
-        .job, .horoscope {
-            margin: 5px 0;
-        }
-    </style>
+    .countdown {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #a10039;
+    }
+  </style>
 </head>
 <body>
 
-    <div id="lastUpdated">Son Güncelleme: Loading...</div>
-    <h1>Okay OK</h1>
+  <!-- Giriş mesajı -->
+  <div class="container active" id="intro">
+    <h1>Seni Bekletmiş Olabilirim...</h1>
+    <p>Bu kadar beklettiğim için özür dilerim... Ama inanki sana en özel menüyü hazırlamak için uğraştım. ❤️</p>
+    <button onclick="openMenu()">❤️ AŞK İÇİN TIKLA ❤️</button>
+  </div>
 
-    <div id="dateTime">Tarih/Saat: Loading...</div>
-    <div id="exchangeRate">Döviz Kuru: Loading...</div>
-    <div id="newsTicker">Haber yükleniyor...</div>
+  <!-- Menü ve Sayaç -->
+  <div class="container" id="menu">
+    <h1>Okay'ın Aşk Menüsü</h1>
+    
+    <label for="food">Bugün ne yedin?</label>
+    <select id="food">
+      <option value="">Seçiniz</option>
+      <option value="Kahvaltı">Kahvaltı</option>
+      <option value="Pizza">Pizza</option>
+      <option value="Salata">Salata</option>
+      <option value="Tatlı">Tatlı</option>
+    </select>
 
-    <div id="okcanInfo">
-        <h2>Okcan Teknoloji: 🌟 Kalite ve Güvenilirlik!</h2>
-        <p>Okcan Teknoloji, Kuzey Kıbrıs'ta en kaliteli elektronik ürünleri sunan bir mağazadır! 🛒 Mi Scooter S3, televizyonlar 📺, klima cihazları ❄️ ve daha fazlasıyla ihtiyacınıza uygun çözümler sağlıyoruz. Müşteri memnuniyeti önceliğimiz! Daha fazla bilgi almak için bize ulaşın: 📞 0392 723 77 18.</p>
-    </div>
+    <label for="drink">Bugün ne içtin?</label>
+    <select id="drink">
+      <option value="">Seçiniz</option>
+      <option value="Su">Su</option>
+      <option value="Kahve">Kahve</option>
+      <option value="Çay">Çay</option>
+      <option value="Meyve suyu">Meyve suyu</option>
+    </select>
 
-    <div id="birthCalculator">
-        <h2>Boyunuzu Kilonuzu Bilmek İster Misiniz?</h2>
-        <p>Beden Kitle İndeksi (BKİ) hesaplayın:</p>
-        <input type="number" id="height" placeholder="Boy (cm)">
-        <input type="number" id="weight" placeholder="Kilo (kg)">
-        <button onclick="calculateBMI()">Hesapla</button>
-        <p id="bmiResult"></p>
-    </div>
+    <button onclick="showResult()">Durumu Göster</button>
 
-    <div id="calendar">
-        <h2>2024 Takvimi</h2>
-        <p id="calendarResults">2024 Yılı boyunca önemli günleri buradan takip edebilirsiniz.</p>
-    </div>
+    <div class="result" id="result"></div>
+    <div class="countdown" id="countdown"></div>
+  </div>
 
-    <div id="jobListings">
-        <h2>Güncel İş İlanları</h2>
-        <div id="jobs">Yükleniyor...</div>
-    </div>
+  <script>
+    function openMenu() {
+      document.getElementById("intro").classList.remove("active");
+      document.getElementById("menu").classList.add("active");
+    }
 
-    <div id="horoscope">
-        <h2>Günlük Burç Yorumları</h2>
-        <div id="horoscopeResults">Yükleniyor...</div>
-    </div>
+    function showResult() {
+      const food = document.getElementById("food").value;
+      const drink = document.getElementById("drink").value;
+      const result = document.getElementById("result");
 
-    <script>
-        // Tarih ve saati güncelleme
-        function updateDateTime() {
-            const now = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            document.getElementById('dateTime').innerText = `Tarih/Saat: ${now.toLocaleString('tr-TR', options)}`;
-            document.getElementById('lastUpdated').innerText = `Son Güncelleme: ${now.toLocaleString('tr-TR', options)}`;
-        }
+      if (!food || !drink) {
+        result.textContent = "Lütfen hem yediklerini hem içtiklerini seç.";
+      } else {
+        result.textContent = `Bugün ${food} yedin ve ${drink} içtin. Kendine dikkat et güzelim! 💖`;
+      }
+    }
 
-        // Döviz kurunu almak için API çağrısı
-        async function getExchangeRate() {
-            try {
-                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-                if (!response.ok) {
-                    throw new Error('Döviz kuru yüklenemedi.');
-                }
-                const data = await response.json();
-                const rate = data.rates.TRY;
-                document.getElementById('exchangeRate').innerText = `Döviz Kuru: 1 USD = ${rate.toFixed(2)} TL`;
-            } catch (error) {
-                console.error('Döviz kuru hatası:', error);
-                document.getElementById('exchangeRate').innerText = 'Döviz Kuru yüklenemedi. Lütfen bağlantınızı kontrol edin veya API hizmetini kontrol edin.';
-            }
-        }
+    function updateCountdown() {
+      const countdown = document.getElementById("countdown");
+      const target = new Date("2025-05-20T00:00:00").getTime();
+      const now = new Date().getTime();
+      const distance = target - now;
 
-        // Güncel haberleri almak için API çağrısı
-        async function getNews() {
-            const newsApiUrl = 'https://newsapi.org/v2/top-headlines?country=tr&apiKey=YOUR_API_KEY'; // Burada uygun bir API kullanmalısınız
-            try {
-                const response = await fetch(newsApiUrl);
-                if (!response.ok) {
-                    throw new Error('Haber yüklenemedi.');
-                }
-                const data = await response.json();
-                const articles = data.articles;
+      if (distance <= 0) {
+        countdown.textContent = "Kavuşma zamanı geldi! 💞";
+        return;
+      }
 
-                if (articles.length > 0) {
-                    const newsTitles = articles.map(article => article.title).join(' • ');
-                    document.getElementById('newsTicker').innerText = newsTitles;
-                } else {
-                    document.getElementById('newsTicker').innerText = 'Güncel haber bulunamadı.';
-                }
-            } catch (error) {
-                console.error('Hata:', error);
-                document.getElementById('newsTicker').innerText = 'Haberler yüklenemedi. Lütfen bağlantınızı kontrol edin.';
-            }
-        }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // BKİ hesaplama fonksiyonu
-        function calculateBMI() {
-            const height = parseFloat(document.getElementById('height').value) / 100; // cm'den m'ye çevir
-            const weight = parseFloat(document.getElementById('weight').value);
-            if (isNaN(height) || isNaN(weight)) {
-                document.getElementById('bmiResult').innerText = 'Lütfen geçerli boy ve kilo girin.';
-                return;
-            }
-            const bmi = weight / (height * height);
-            document.getElementById('bmiResult').innerText = `Beden Kitle İndeksiniz: ${bmi.toFixed(2)}`;
-        }
+      countdown.textContent = `Kavuşmamıza ${days} gün, ${hours} saat, ${minutes} dakika, ${seconds} saniye kaldı... 💞`;
+    }
 
-        // Güncel iş ilanlarını ve burç yorumlarını almak için API çağrısı
-        async function getJobListings() {
-            const jobApiUrl = 'https://api.example.com/jobs'; // Örnek URL, burayı güncelleyiniz
-            try {
-                const response = await fetch(jobApiUrl);
-                if (!response.ok) {
-                    throw new Error('İş ilanları yüklenemedi.');
-                }
-                const data = await response.json();
-                const jobs = data.jobs.map(job => `<div class="job">${job.title} - ${job.company}</div>`).join('');
-                document.getElementById('jobs').innerHTML = jobs;
-            } catch (error) {
-                console.error('Hata:', error);
-                document.getElementById('jobs').innerText = 'İş ilanları yüklenemedi. Lütfen bağlantınızı kontrol edin.';
-            }
-        }
-
-        // Günlük burç yorumlarını almak için API çağrısı
-        async function getHoroscope() {
-            const horoscopeApiUrl = 'https://horoscope-api.herokuapp.com/horoscope/today/Aries'; // Örnek URL, burayı güncelleyiniz
-            try {
-                const response = await fetch(horoscopeApiUrl);
-                if (!response.ok) {
-                    throw new Error('Burç yorumları yüklenemedi.');
-                }
-                const data = await response.json();
-                document.getElementById('horoscopeResults').innerHTML = `${data.sunsign}: ${data.horoscope}`;
-            } catch (error) {
-                console.error('Hata:', error);
-                document.getElementById('horoscopeResults').innerText = 'Burç yorumları yüklenemedi. Lütfen bağlantınızı kontrol edin.';
-            }
-        }
-
-        // Sayfa yüklendiğinde verileri güncelle
-        window.onload = async () => {
-            updateDateTime();
-            getExchangeRate();
-            getNews();
-            await getJobListings();
-            await getHoroscope();
-            setInterval(updateDateTime, 1000); // Her saniye güncelle
-            setInterval(getExchangeRate, 3600000); // Her saat güncelle
-            setInterval(getNews, 600000); // Her 10 dakikada bir güncelle
-            setInterval(getJobListings, 600000); // Her 10 dakikada bir güncelle
-            setInterval(getHoroscope, 86400000); // Her gün güncelle
-        };
-    </script>
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 
 </body>
 </html>
