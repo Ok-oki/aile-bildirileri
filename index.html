@@ -65,9 +65,15 @@
       font-style: italic;
       color: #5c0033;
       margin-top: 10px;
+      white-space: pre-line;
     }
     .hidden {
       display: none;
+    }
+    .apology {
+      margin-bottom: 15px;
+      font-style: italic;
+      color: #aa2233;
     }
   </style>
 </head>
@@ -178,7 +184,7 @@
           message = "Tansiyon veya sıvı eksikliği olabilir. Hemen su iç, rahat bir yere geç.";
           break;
         case "mide bulantısı":
-          message = let message = `
+          message = `
 İldoşuma 🍓
 
 Canımın içi,
@@ -209,7 +215,7 @@ Kendini zorlamadan… Tıpkı benim sana yaklaşımım gibi nazikçe…
 Gözlerini kapa, bizi düşün… 20 Mayıs'a ne kadar az kaldı, bir bilsen! Kavuşmamız her şeyden daha güçlü bir ilaç olacak 💘
 
 Seni çok seviyorum İldoşum... Her zaman, her yerde. 💞
-`;
+          `;
           break;
         case "hiçbir şey yok":
           message = "Harika! O zaman keyfine bak İldoşum. ❤️";
