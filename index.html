@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Okay'dan Aşk Menüsü</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Okay'dan İldoş'a</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: #ffeef2;
-      color: #b30047;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
       margin: 0;
       padding: 0;
-      text-align: center;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
     }
-
-    .container {
-      background: #fff0f4;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+    .menu-container {
+      background: #fffafa;
+      padding: 25px;
+      margin-top: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
       width: 90%;
-      display: none;
+      max-width: 500px;
+      text-align: center;
+      color: #cc1f45;
     }
-
-    .active {
-      display: block;
-    }
-
     h1 {
       margin-bottom: 10px;
     }
-
-    p {
-      margin-bottom: 20px;
-    }
-
-    button {
-      background-color: #d2004c;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #a10039;
-    }
-
-    select {
+    select, button {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
+      border: 2px solid #cc1f45;
+      border-radius: 10px;
       font-size: 16px;
-      border-radius: 5px;
-      border: 2px solid #d2004c;
     }
-
-    .result {
-      margin-top: 15px;
+    button {
+      background: #cc1f45;
+      color: white;
       font-weight: bold;
+      cursor: pointer;
     }
-
-    .countdown {
+    button:hover {
+      background: #a61132;
+    }
+    .result, .extra-options, .love-section {
       margin-top: 20px;
+    }
+    ul {
+      text-align: left;
+      margin: 10px auto;
+      padding-left: 20px;
+      color: #444;
+    }
+    .countdown {
       font-size: 18px;
-      color: #a10039;
+      margin-bottom: 15px;
+      color: #b3003c;
+    }
+    .poem {
+      font-style: italic;
+      color: #5c0033;
+      margin-top: 10px;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Giriş mesajı -->
-  <div class="container active" id="intro">
-    <h1>Seni Bekletmiş Olabilirim...</h1>
-    <p>Bu kadar beklettiğim için özür dilerim... Ama inanki sana en özel menüyü hazırlamak için uğraştım. ❤️</p>
-    <button onclick="openMenu()">❤️ AŞK İÇİN TIKLA ❤️</button>
-  </div>
+  <div class="menu-container">
+    <h1>Okay'ın Sağlık ve Aşk Menüsü</h1>
+    <p class="apology">Seni bu kadar beklettiğim için özür dilerim İldoşum... ama bu çaban, sana en güzel menüyü sunmaktı. 💖</p>
 
-  <!-- Menü ve Sayaç -->
-  <div class="container" id="menu">
-    <h1>Okay'ın Aşk Menüsü</h1>
-    
+    <button onclick="showLoveSection()">💘 Aşk İçin Tıkla</button>
+
+    <div id="loveSection" class="love-section hidden">
+      <h2>İldoşum'a Sonsuz Aşk 💞</h2>
+      <div class="countdown" id="countdown"></div>
+      <p>Seninle <strong>15 Mart 2024</strong>’te başlayan bu yolculukta, her gün daha da âşık oluyorum...</p>
+
+      <div class="poem">  
+        İldoşum,<br/>
+        Gözlerin gökyüzüm, gülüşün güneşim...<br/>
+        Her anımda sen varsın, seninle sonsuzum.<br/>
+        Kavuşmamıza az kaldı, kalbim hep seninle...<br/>
+        Beklemek bile güzel seninle. 💖
+      </div>
+
+      <div class="poem">
+        Ellerini tutamasam da, kalbim elindedir.<br/>
+        Seni düşünmek bile, yüreğime huzurdur İldoşum.<br/>
+        20 Mayıs, yalnızca bir tarih değil,<br/>
+        Ruhlarımızın yeniden sarılacağı gündür. 🌹
+      </div>
+    </div>
+
+    <hr style="margin: 30px 0; border-color: #ffccd5;">
+
     <label for="food">Bugün ne yedin?</label>
     <select id="food">
       <option value="">Seçiniz</option>
@@ -95,63 +109,118 @@
       <option value="Pizza">Pizza</option>
       <option value="Salata">Salata</option>
       <option value="Tatlı">Tatlı</option>
+      <option value="İskender">İskender</option>
     </select>
 
-    <label for="drink">Bugün ne içtin?</label>
-    <select id="drink">
-      <option value="">Seçiniz</option>
-      <option value="Su">Su</option>
-      <option value="Kahve">Kahve</option>
-      <option value="Çay">Çay</option>
-      <option value="Meyve suyu">Meyve suyu</option>
-    </select>
-
-    <button onclick="showResult()">Durumu Göster</button>
-
+    <button onclick="showStatus()">Durumu Göster</button>
     <div class="result" id="result"></div>
-    <div class="countdown" id="countdown"></div>
+
+    <div class="extra-options" id="extraOptions" style="display:none;">
+      <label for="symptom">Nasıl hissediyorsun?</label>
+      <select id="symptom">
+        <option value="">Seçiniz</option>
+        <option value="karın ağrısı">Karın ağrısı</option>
+        <option value="baş dönmesi">Baş dönmesi</option>
+        <option value="mide bulantısı">Mide bulantısı</option>
+        <option value="hiçbir şey yok">Hiçbir şey yok</option>
+      </select>
+      <button onclick="evaluateSymptom()">Analiz Et</button>
+      <div class="result" id="symptomResult"></div>
+    </div>
   </div>
 
   <script>
-    function openMenu() {
-      document.getElementById("intro").classList.remove("active");
-      document.getElementById("menu").classList.add("active");
-    }
+    function showStatus() {
+      const food = document.getElementById('food').value;
+      const result = document.getElementById('result');
+      const extraOptions = document.getElementById('extraOptions');
+      const symptomResult = document.getElementById('symptomResult');
 
-    function showResult() {
-      const food = document.getElementById("food").value;
-      const drink = document.getElementById("drink").value;
-      const result = document.getElementById("result");
+      symptomResult.textContent = "";
+      extraOptions.style.display = "none";
 
-      if (!food || !drink) {
-        result.textContent = "Lütfen hem yediklerini hem içtiklerini seç.";
-      } else {
-        result.textContent = `Bugün ${food} yedin ve ${drink} içtin. Kendine dikkat et güzelim! 💖`;
-      }
-    }
-
-    function updateCountdown() {
-      const countdown = document.getElementById("countdown");
-      const target = new Date("2025-05-20T00:00:00").getTime();
-      const now = new Date().getTime();
-      const distance = target - now;
-
-      if (distance <= 0) {
-        countdown.textContent = "Kavuşma zamanı geldi! 💞";
+      if (!food) {
+        result.textContent = "Lütfen bir yemek seçiniz.";
         return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.textContent = `Kavuşmamıza ${days} gün, ${hours} saat, ${minutes} dakika, ${seconds} saniye kaldı... 💞`;
+      if (food === "İskender") {
+        result.innerHTML = `
+          <strong>İskender yedin!</strong><br><br>
+          Bu lezzetli ama ağır yemek, sindirim sistemini zorlayabilir. Saklama ve hazırlanma koşulları da önemlidir.<br><br>
+          <u>Sana önerilerim:</u>
+          <ul>
+            <li>Hafif yürüyüş yap, hemen yatma.</li>
+            <li>Bol su iç.</li>
+            <li>Sonraki öğünü hafif geçir.</li>
+            <li>Gazlı ve yağlılardan uzak dur.</li>
+            <li>Çay/kahve ölçülü tüket.</li>
+            <li>Belirtileri takip et. Gerekirse doktora danış.</li>
+            <li>Porsiyon miktarına dikkat et.</li>
+          </ul>
+        `;
+        extraOptions.style.display = "block";
+      } else {
+        result.textContent = `Bugün ${food} yedin. Afiyet bal şeker olsun İldoşum! ❤️`;
+      }
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+    function evaluateSymptom() {
+      const symptom = document.getElementById('symptom').value;
+      const symptomResult = document.getElementById('symptomResult');
 
+      let message = "";
+      switch (symptom) {
+        case "karın ağrısı":
+          message = "Muhtemelen yağlı yemek mideyi zorladı. Dinlen, bol su iç, gerekirse doktora başvur.";
+          break;
+        case "baş dönmesi":
+          message = "Tansiyon veya sıvı eksikliği olabilir. Hemen su iç, rahat bir yere geç.";
+          break;
+        case "mide bulantısı":
+          message = "İskender bazen mideyi zorlar. Hafif beslen, mideyi yorma.";
+          break;
+        case "hiçbir şey yok":
+          message = "Harika! O zaman keyfine bak İldoşum. ❤️";
+          break;
+        default:
+          message = "Lütfen bir seçenek belirle.";
+      }
+
+      symptomResult.textContent = message;
+    }
+
+    function showLoveSection() {
+      document.getElementById('loveSection').classList.remove('hidden');
+      startCountdown();
+    }
+
+    function startCountdown() {
+      const countdown = document.getElementById('countdown');
+      const targetDate = new Date("2025-05-20T00:00:00").getTime();
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+          countdown.innerHTML = "Kavuşma zamanı geldi! 💞";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+
+        countdown.innerHTML = `
+          Kavuşmamıza: <strong>${days}</strong> gün
+          <strong>${hours}</strong>s
+          <strong>${minutes}</strong>dk
+          <strong>${seconds}</strong>sn kaldı. 💘
+        `;
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
